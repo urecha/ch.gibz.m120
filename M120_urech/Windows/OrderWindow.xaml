@@ -1,0 +1,138 @@
+﻿<Window x:Class="M120_urech.Windows.OrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:M120_urech.Windows"
+        mc:Ignorable="d"
+        Title="OrderWindow" Height="450" Width="800">
+    <Grid Margin="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderThickness="0 0 0 1" BorderBrush="#0066CC">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                    <Label FontSize="36" Grid.Column="0" Content="{Binding Film.Title}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0"></Label>
+                    <Label FontSize="18" Grid.Column="1" Content="{Binding Film.Category.Description}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 6"></Label>
+                    <Label FontSize="18" Grid.Column="2" Content="{Binding Film.Duration,Converter={StaticResource duration_formatter}}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 8"></Label>
+                </StackPanel>
+                <TextBlock Grid.Column="1" Margin="22 10" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="18" Foreground="#0066cc">
+                    Order tickets
+                </TextBlock>
+            </Grid>
+        </Border>
+        <DockPanel Grid.Row="1" Visibility="{Binding DialogVisibility}">
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.5*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Ellipse HorizontalAlignment="Center" VerticalAlignment="Bottom" Stroke="#0066cc" Height="40" Width="40" Grid.Row="0" Fill="#0066cc"></Ellipse>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontSize="24" Content="1"></Label>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" FontSize="18" Content="Choose a presentation"></Label>
+                    </Grid>
+                    <Label Grid.Row="1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Bottom">Available presentations:</Label>
+                    <ComboBox Grid.Row="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" Margin="15"  ItemsSource="{Binding Film.Presentations}" Height="30" SelectedItem="{Binding SelectedPresentation}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding PresentationTime,Converter={StaticResource duration_formatter}}"></Label>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation From="0.5" To="1.0" Duration="0:0:0.6" Storyboard.TargetProperty="Opacity"></DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Grid.Triggers>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.5*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Ellipse HorizontalAlignment="Center" VerticalAlignment="Bottom" Stroke="#0066cc" Height="40" Width="40" Grid.Row="0" Fill="#0066cc"></Ellipse>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontSize="24" Content="2"></Label>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" FontSize="18" Content="Choose amount of tickets"></Label>
+                    </Grid>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <Label FontSize="16" VerticalAlignment="Center" MinWidth="125">Tickets available:</Label>
+                        <TextBox VerticalAlignment="Center" IsEnabled="False" MinWidth="35" HorizontalContentAlignment="Center" Text="{Binding SelectedPresentation.FreePlacesCount}"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="15">
+                        <Label FontSize="16" VerticalAlignment="Center" MinWidth="125">Get Tickets:</Label>
+                        <TextBox x:Name="Tickets_Input" PreviewTextInput="Tickets_Input_PreviewTextInput" VerticalAlignment="Center" MinWidth="35" HorizontalContentAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="TicketsOrdered" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <ExceptionValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.5*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Ellipse HorizontalAlignment="Center" VerticalAlignment="Bottom" Stroke="#0066cc" Height="40" Width="40" Grid.Row="0" Fill="#0066cc"></Ellipse>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontSize="24" Content="3"></Label>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" FontSize="18" Content="Confirm &#128504;"></Label>
+                    </Grid>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <Label FontSize="16" VerticalAlignment="Center" MinWidth="60">Total:</Label>
+                        <TextBox IsEnabled="false" Grid.Row="0" FontSize="16" MinWidth="35" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TotalPrice, Converter={StaticResource price_formatter}}"></TextBox>
+                    </StackPanel>
+                    <Button Grid.Row="2" Style="{StaticResource roche_button}" Command="{Binding Confirm}" VerticalAlignment="Top" Height="30" Margin="15" Content="Confirm Order"></Button>
+                </Grid>
+            </Grid>
+        </DockPanel>
+        <Grid Visibility="{Binding EndScreenVisibility}" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <Label FontSize="24" Foreground="#0066cc" Content="{Binding TicketsOrdered}"></Label>
+                <Label FontSize="24" Content="tickets have been ordered for"></Label>
+                <Label FontSize="24" Foreground="#0066cc" Content="{Binding TotalPrice, Converter={StaticResource price_formatter}}"></Label>
+            </StackPanel>
+            <Button Style="{StaticResource roche_button}" Command="{Binding Close}" HorizontalAlignment="Center" Content="OK" Grid.Row="1" MinHeight="40" MinWidth="80" Margin="20" VerticalAlignment="Top"></Button>
+        </Grid>
+    </Grid>
+</Window>
