@@ -14,7 +14,7 @@
         <Border Grid.Row="0" BorderThickness="0 0 0 1" BorderBrush="#0066CC">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel Orientation="Horizontal" Grid.Column="0">
@@ -23,7 +23,7 @@
                     <Label FontSize="18" Grid.Column="2" Content="{Binding Film.Duration,Converter={StaticResource duration_formatter}}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 8"></Label>
                 </StackPanel>
                 <TextBlock Grid.Column="1" Margin="22 10" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="18" Foreground="#0066cc">
-                    Order tickets
+                    Order tickets &#127915;
                 </TextBlock>
             </Grid>
         </Border>
@@ -38,7 +38,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="0.5*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.5*"></RowDefinition>
+                        <RowDefinition Height="0.5*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.RowDefinitions>
@@ -71,7 +72,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="0.5*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.5*"></RowDefinition>
+                        <RowDefinition Height="0.5*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.RowDefinitions>
@@ -80,14 +82,14 @@
                         </Grid.RowDefinitions>
                         <Ellipse HorizontalAlignment="Center" VerticalAlignment="Bottom" Stroke="#0066cc" Height="40" Width="40" Grid.Row="0" Fill="#0066cc"></Ellipse>
                         <Label HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontSize="24" Content="2"></Label>
-                        <Label HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" FontSize="18" Content="Choose amount of tickets"></Label>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" FontSize="18" Content="Choose amount of tickets &#127915;"></Label>
                     </Grid>
                     <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <Label FontSize="16" VerticalAlignment="Center" MinWidth="125">Tickets available:</Label>
+                        <Label FontSize="16" VerticalAlignment="Center" MinWidth="125">Available &#127915;:</Label>
                         <TextBox VerticalAlignment="Center" IsEnabled="False" MinWidth="35" HorizontalContentAlignment="Center" Text="{Binding SelectedPresentation.FreePlacesCount}"></TextBox>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="15">
-                        <Label FontSize="16" VerticalAlignment="Center" MinWidth="125">Get Tickets:</Label>
+                        <Label FontSize="16" VerticalAlignment="Center" MinWidth="125">Order &#127915;:</Label>
                         <TextBox x:Name="Tickets_Input" PreviewTextInput="Tickets_Input_PreviewTextInput" VerticalAlignment="Center" MinWidth="35" HorizontalContentAlignment="Center">
                             <TextBox.Text>
                                 <Binding Path="TicketsOrdered" UpdateSourceTrigger="PropertyChanged">
@@ -103,7 +105,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="0.5*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.5*"></RowDefinition>
+                        <RowDefinition Height="0.5*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.RowDefinitions>
@@ -112,13 +115,17 @@
                         </Grid.RowDefinitions>
                         <Ellipse HorizontalAlignment="Center" VerticalAlignment="Bottom" Stroke="#0066cc" Height="40" Width="40" Grid.Row="0" Fill="#0066cc"></Ellipse>
                         <Label HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontSize="24" Content="3"></Label>
-                        <Label HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" FontSize="18" Content="Confirm &#128504;"></Label>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" FontSize="18" Content="Confirm"></Label>
                     </Grid>
                     <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <Label FontSize="16" VerticalAlignment="Center" MinWidth="60">Total:</Label>
+                        <Label FontSize="16" VerticalAlignment="Center" MinWidth="60">Total &#127915;:</Label>
+                        <TextBox IsEnabled="false" Grid.Row="0" FontSize="16" MinWidth="35" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TicketsOrdered}"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Label FontSize="16" VerticalAlignment="Center" MinWidth="60">Total CHF:</Label>
                         <TextBox IsEnabled="false" Grid.Row="0" FontSize="16" MinWidth="35" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TotalPrice, Converter={StaticResource price_formatter}}"></TextBox>
                     </StackPanel>
-                    <Button Grid.Row="2" Style="{StaticResource roche_button}" Command="{Binding Confirm}" VerticalAlignment="Top" Height="30" Margin="15" Content="Confirm Order"></Button>
+                    <Button Grid.Row="3" Style="{StaticResource roche_button}" Command="{Binding Confirm}" VerticalAlignment="Top" Height="30" Margin="15" Content="Confirm Order &#128504;"></Button>
                 </Grid>
             </Grid>
         </DockPanel>
@@ -129,7 +136,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                 <Label FontSize="24" Foreground="#0066cc" Content="{Binding TicketsOrdered}"></Label>
-                <Label FontSize="24" Content="tickets have been ordered for"></Label>
+                <Label FontSize="24" Content="&#127915; tickets have been ordered for"></Label>
                 <Label FontSize="24" Foreground="#0066cc" Content="{Binding TotalPrice, Converter={StaticResource price_formatter}}"></Label>
             </StackPanel>
             <Button Style="{StaticResource roche_button}" Command="{Binding Close}" HorizontalAlignment="Center" Content="OK" Grid.Row="1" MinHeight="40" MinWidth="80" Margin="20" VerticalAlignment="Top"></Button>

@@ -29,11 +29,14 @@ namespace M120_urech.Windows
             orderContext.Close = new Commands.RelayCommand(
                 payload => this.Close(), 
                 a => true);
-            this.DataContext = orderContext;
+            DataContext = orderContext;
         }
 
         private static readonly Regex _numeric = new Regex("[0-9]+");
 
+        /// <summary>
+        /// Ensures that the tickets-input only accepts numeric values.
+        /// </summary>
         private void Tickets_Input_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !_numeric.IsMatch(e.Text);

@@ -75,7 +75,6 @@
                         </Grid.ColumnDefinitions>
                         <Label VerticalAlignment="Center" Content="Films &amp; Presentations" Grid.Column="0"></Label>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                            <!--<Label VerticalContentAlignment="Center">Search title:</Label>-->
                             <Button IsEnabled="False" Style="{DynamicResource Hidden_Button}" FontFamily="Segoe UI Symbol" Content="&#128270;" Background="Transparent" BorderBrush="Transparent"/>
                             <TextBox Margin="5" Width="260" HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                         </StackPanel>

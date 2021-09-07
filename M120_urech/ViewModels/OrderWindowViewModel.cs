@@ -70,7 +70,6 @@ namespace M120_urech.ViewModels
                 _ticketsOrdered = value;
                 TotalPrice = _ticketsOrdered * Film.PRICE_PER_TICKET;
                 NotifyPropertyChanged();
-
             }
         }
 
@@ -99,7 +98,7 @@ namespace M120_urech.ViewModels
                 EndScreenVisibility = Visibility.Visible;
             }, a =>
             {
-                return TotalPrice != 0 && !float.IsInfinity(TotalPrice);
+                return TotalPrice != 0 && !float.IsInfinity(TotalPrice) && SelectedPresentation != null && TicketsOrdered != 0;
             });
 
             Close = new RelayCommand(payload =>
